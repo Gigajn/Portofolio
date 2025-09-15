@@ -1,103 +1,72 @@
-import Image from "next/image";
+import { Hero } from "@/components/Hero";
+import { Section } from "@/components/Section";
+import { ProjectCard } from "@/components/ProjectCard";
+import { Contact } from "@/components/Contact";
+import { projects } from "@/data/projects";
+import { personal } from "@/data/personal";
+import { skills } from "@/data/skills";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="page-stack">
+      <section id="home">
+        <Hero />
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <Section
+        id="projects"
+        title="Projects"
+        subtitle="Selected projects covering web, mobile, and machine learning."
+      >
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((p) => (
+            <ProjectCard key={p.slug} project={p} />
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </Section>
+
+      <Section
+        id="about"
+        title="Short Profile"
+        subtitle="Digital product engineering with a propensity towards back-end and data."
+      >
+        {/* Card wrapper to separate from page background */}
+        <div className="relative">
+          {/* subtle highlight on top edge (very light) */}
+          <div className="pointer-events-none absolute -inset-x-2 -top-2 h-8 bg-gradient-to-b from-brand-100/70 to-transparent rounded-t-2xl" />
+
+          <div className="card p-6 md:p-8 xl:p-10 bg-white/90 border-slate-200/80 backdrop-blur-sm">
+            <div className="space-y-6">
+              <p className="subtle text-[17px] leading-7 md:leading-8">
+                I design and develop software that is easy to use and reliable
+                behind the scenes. My work spans product interfaces and the core
+                systems underneath, APIs, databases, and data flows that keep
+                information accurate.
+              </p>
+
+              <div className="flex items-start gap-3 md:gap-4">
+                <span
+                  aria-hidden
+                  className="mt-1 inline-block h-5 w-1 rounded-full bg-brand-500/70"
+                />
+                <p className="text-sm text-slate-600">
+                  I focus on clear endpoints, dependable data pipelines, and
+                  small improvements that make the product smoother and easier
+                  to maintain.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section
+        id="contact"
+        title="Contact"
+        subtitle="Let's talk about building something useful."
+      >
+        <Contact />
+      </Section>
     </div>
   );
 }
