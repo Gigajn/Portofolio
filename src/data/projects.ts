@@ -1,4 +1,4 @@
-export type ProjectCategory = "AI & Machine Learning" | "Web" | "Game & AR";
+export type ProjectCategory = "AI & Machine Learning" | "Web" | "Augmented Reality";
 
 export type Project = {
   slug: string;
@@ -131,7 +131,7 @@ export const projects: Project[] = [
   {
     slug: "wisata-konservasi-ar",
     title: "Wisata Konservasi Augmented Reality",
-    category: "Game & AR",
+    category: "Augmented Reality",
     summary:
       "Aplikasi edukasi AR bertema konservasi dengan model 3D dan scene interaktif.",
     description:
@@ -140,27 +140,12 @@ export const projects: Project[] = [
     image: "/assets/wisata-konservasi-ar.png",
     highlights: ["Tracking berbasis marker dan markerless", "Optimasi model 3D"],
   },
-  {
-    slug: "oodin-games",
-    title: "Oodin Games",
-    category: "Game & AR",
-    summary:
-      "Prototipe game indie dengan fokus pada gameplay loop dan tempo level.",
-    description:
-      "Prototipe game indie yang mengeksplorasi gameplay loop yang solid dan tempo level yang pas. Saya mengerjakan sistem gameplay, integrasi aset, dan nuansa permainan secara keseluruhan.",
-    tech: ["Construct 3", "Game Design"],
-    image: "/assets/oodin-games.png",
-    highlights: [
-      "Prototipe yang sudah dapat dimainkan",
-      "Dokumentasi game loop dan level design",
-    ],
-  },
 ];
 
 export const projectCategories: ProjectCategory[] = [
   "AI & Machine Learning",
   "Web",
-  "Game & AR",
+  "Augmented Reality",
 ];
 
 export function getProjectBySlug(slug: string) {

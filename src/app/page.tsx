@@ -61,7 +61,7 @@ export default function HomePage() {
         id="proyek"
         eyebrow="Portofolio"
         title="Proyek pilihan"
-        subtitle="Dari model machine learning hingga aplikasi web, game, dan AR. Klik kartu untuk melihat detail, source code, atau demo."
+        subtitle="Dari AI dan machine learning hingga aplikasi web dan Augmented Reality. Klik kartu untuk melihat detail, source code, atau demo."
       >
         <ProjectGrid />
       </Section>

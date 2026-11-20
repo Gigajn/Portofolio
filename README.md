@@ -15,7 +15,6 @@ Website portofolio pribadi **Giga Jundan Al Huda**, mahasiswa Sistem Informasi d
 | [Website Pemilihan Formatur IMM](https://github.com/Gigajn/formatur-fe) ([demo](https://imm-zeta.vercel.app)) | Web (e-voting) | Angular, TypeScript, Express, Node.js |
 | Habibie Club Genius | Web (platform belajar) | Web |
 | Wisata Konservasi Augmented Reality | AR | Unity, C#, Vuforia |
-| Oodin Games | Game | Construct 3 |
 
 ## Teknologi website
 
