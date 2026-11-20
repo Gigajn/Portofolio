@@ -1,70 +1,119 @@
+import { CheckCircle2, GraduationCap, Briefcase } from "lucide-react";
 import { Hero } from "@/components/Hero";
 import { Section } from "@/components/Section";
-import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectGrid } from "@/components/ProjectGrid";
 import { Contact } from "@/components/Contact";
-import { projects } from "@/data/projects";
 import { personal } from "@/data/personal";
-import { skills } from "@/data/skills";
+import { skillGroups } from "@/data/skills";
 
 export default function HomePage() {
   return (
     <div className="page-stack">
-      <section id="home">
-        <Hero />
-      </section>
+      <Hero />
 
-      <Section
-        id="projects"
-        title="Projects"
-        subtitle="Selected projects covering web, mobile, and machine learning."
-      >
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
-          ))}
-        </div>
-      </Section>
-
-      <Section
-        id="about"
-        title="Short Profile"
-        subtitle="Digital product engineering with a propensity towards back-end and data."
-      >
-        {/* Card wrapper to separate from page background */}
-        <div className="relative">
-          {/* subtle highlight on top edge (very light) */}
-          <div className="pointer-events-none absolute -inset-x-2 -top-2 h-8 bg-gradient-to-b from-brand-100/70 to-transparent rounded-t-2xl" />
-
-          <div className="card p-6 md:p-8 xl:p-10 bg-white/90 border-slate-200/80 backdrop-blur-sm">
-            <div className="space-y-6">
-              <p className="subtle text-[17px] leading-7 md:leading-8">
-                I design and develop software that is easy to use and reliable
-                behind the scenes. My work spans product interfaces and the core
-                systems underneath, APIs, databases, and data flows that keep
-                information accurate.
+      <Section id="tentang" eyebrow="Tentang Saya" title="Profil singkat">
+        <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+          <div className="card space-y-5 p-6 md:p-8">
+            {personal.about.map((p) => (
+              <p key={p} className="text-[17px] leading-8 text-slate-700">
+                {p}
               </p>
-
-              <div className="flex items-start gap-3 md:gap-4">
-                <span
-                  aria-hidden
-                  className="mt-1 inline-block h-5 w-1 rounded-full bg-brand-500/70"
-                />
-                <p className="text-sm text-slate-600">
-                  I focus on clear endpoints, dependable data pipelines, and
-                  small improvements that make the product smoother and easier
-                  to maintain.
-                </p>
-              </div>
-            </div>
+            ))}
+          </div>
+          <div className="card p-6 md:p-8">
+            <h3 className="mb-4 font-bold text-slate-900">Cara saya bekerja</h3>
+            <ul className="space-y-3">
+              {personal.values.map((v) => (
+                <li key={v} className="flex items-start gap-3 text-slate-700">
+                  <CheckCircle2 size={20} className="mt-0.5 shrink-0 text-brand-600" />
+                  <span>{v}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </Section>
 
       <Section
-        id="contact"
-        title="Contact"
-        subtitle="Let's talk about building something useful."
+        id="keahlian"
+        eyebrow="Keahlian"
+        title="Teknologi yang saya gunakan"
+        subtitle="Dikelompokkan berdasarkan bidang, sesuai proyek yang pernah saya kerjakan."
       >
+        <div className="grid gap-5 sm:grid-cols-2">
+          {skillGroups.map((g) => (
+            <div key={g.title} className="card p-6">
+              <h3 className="font-bold text-slate-900">{g.title}</h3>
+              <p className="subtle mt-1 text-sm">{g.description}</p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {g.items.map((s) => (
+                  <li key={s} className="badge px-3 py-1.5 text-sm">
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        id="proyek"
+        eyebrow="Portofolio"
+        title="Proyek pilihan"
+        subtitle="Dari AI dan machine learning hingga aplikasi web dan Augmented Reality. Klik kartu untuk melihat detail, source code, atau demo."
+      >
+        <ProjectGrid />
+      </Section>
+
+      <Section id="pendidikan" eyebrow="Latar Belakang" title={personal.experience.length ? "Pendidikan & Pengalaman" : "Pendidikan"}>
+        <ol className="space-y-5">
+          {personal.experience.map((e) => (
+            <li key={`${e.title}-${e.org}`} className="card flex gap-5 p-6">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+                <Briefcase size={22} />
+              </span>
+              <div className="space-y-1">
+                <h3 className="font-bold text-slate-900">{e.title}</h3>
+                <p className="subtle">
+                  {e.org}
+                  {e.period ? ` · ${e.period}` : ""}
+                </p>
+                {e.points.length ? (
+                  <ul className="mt-3 list-disc space-y-1 pl-5 text-slate-700">
+                    {e.points.map((pt) => (
+                      <li key={pt}>{pt}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            </li>
+          ))}
+          {personal.education.map((e) => (
+            <li key={e.institution} className="card flex gap-5 p-6">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+                <GraduationCap size={22} />
+              </span>
+              <div className="space-y-1">
+                <h3 className="font-bold text-slate-900">{e.institution}</h3>
+                <p className="subtle">
+                  {e.program}
+                  {e.period ? ` · ${e.period}` : ""}
+                </p>
+                {e.notes.length ? (
+                  <ul className="mt-3 list-disc space-y-1 pl-5 text-slate-700">
+                    {e.notes.map((n) => (
+                      <li key={n}>{n}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section id="kontak" eyebrow="Kontak" title="Tertarik bekerja sama?">
         <Contact />
       </Section>
     </div>

@@ -1,83 +1,128 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
+import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, FolderDown, Github } from "lucide-react";
+import { ProjectCover } from "@/components/ProjectCover";
 import { getProjectBySlug, projects } from "@/data/projects";
 
-export async function generateStaticParams() {
+type Props = { params: Promise<{ slug: string }> };
+
+export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const p = getProjectBySlug(params.slug);
-  return { title: p ? `${p.title} – Portofolio` : "Proyek – Portofolio" };
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const p = getProjectBySlug(slug);
+  if (!p) return { title: "Proyek tidak ditemukan" };
+  return {
+    title: p.title,
+    description: p.summary,
+    alternates: { canonical: `/projects/${p.slug}` },
+    openGraph: { title: p.title, description: p.summary, ...(p.image ? { images: [{ url: p.image }] } : {}) },
+  };
 }
 
-export default function ProjectDetail({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const p = getProjectBySlug(params.slug);
-  if (!p) return notFound();
+export default async function ProjectDetail({ params }: Props) {
+  const { slug } = await params;
+  const index = projects.findIndex((x) => x.slug === slug);
+  if (index === -1) notFound();
+
+  const p = projects[index];
+  const next = projects[(index + 1) % projects.length];
+  const meta = [
+    { label: "Kategori", value: p.category },
+    { label: "Status", value: p.status },
+    { label: "Peran", value: p.role },
+    { label: "Periode", value: p.period },
+  ].filter((m) => m.value);
 
   return (
-    <div className="space-y-8">
-      <Link href="/" className="text-slate-600 hover:text-slate-900">
-        ← Kembali
+    <article className="mx-auto max-w-4xl space-y-10">
+      <Link href="/#proyek" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-brand-700">
+        <ArrowLeft size={16} /> Kembali ke daftar proyek
       </Link>
 
-      <header className="space-y-2">
-        <h1 className="text-3xl font-bold">{p.title}</h1>
-        {p.period ? <p className="subtle">{p.period}</p> : null}
-        <div className="flex flex-wrap gap-2">
-          {p.tech.map((t) => (
-            <span key={t} className="badge">{t}</span>
-          ))}
-        </div>
+      <header className="space-y-4">
+        <span className="badge-brand">{p.category}</span>
+        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl">{p.title}</h1>
+        <p className="max-w-2xl text-lg text-slate-600">{p.summary}</p>
       </header>
 
-      {/* Gunakan aspect ratio + <Image fill /> agar tajam di semua device */}
-      <div className="relative w-full aspect-[16/9] overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
-        <Image
-          src={p.image}
-          alt={p.title}
-          fill
-          sizes="(min-width:1024px) 960px, 100vw"
-          quality={90}
-          className="object-cover"
-          priority={true}   // halaman detail: prioritas tinggi untuk gambar utama
-        />
+      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm">
+        <ProjectCover project={p} sizes="(min-width:1024px) 896px, 100vw" priority />
       </div>
 
-      <div className="space-y-4">
-        <p className="leading-7 text-slate-700">{p.description}</p>
-        {p.highlights?.length ? (
-          <ul className="list-disc list-inside text-slate-700">
-            {p.highlights.map((h, i) => (
-              <li key={i}>{h}</li>
-            ))}
-          </ul>
-        ) : null}
-      </div>
+      <div className="grid gap-8 md:grid-cols-[1.6fr_1fr]">
+        <div className="space-y-8">
+          <section className="space-y-3">
+            <h2 className="text-xl font-bold text-slate-900">Tentang proyek</h2>
+            <p className="leading-8 text-slate-700">{p.description}</p>
+          </section>
 
-      {p.links && (p.links.github || p.links.demo) ? (
-        <div className="flex gap-3">
-          {p.links.demo && (
-            <a className="btn-primary" href={p.links.demo} target="_blank" rel="noreferrer">
-              Demo
-            </a>
-          )}
-          {p.links.github && (
-            <a className="btn-ghost" href={p.links.github} target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-          )}
+          {p.highlights?.length ? (
+            <section className="space-y-3">
+              <h2 className="text-xl font-bold text-slate-900">Poin utama</h2>
+              <ul className="space-y-2">
+                {p.highlights.map((h) => (
+                  <li key={h} className="flex items-start gap-3 text-slate-700">
+                    <CheckCircle2 size={20} className="mt-0.5 shrink-0 text-brand-600" />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
         </div>
-      ) : null}
-    </div>
+
+        <aside className="card h-fit space-y-5 p-6">
+          {meta.map((m) => (
+            <div key={m.label}>
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{m.label}</p>
+              <p className="font-medium text-slate-800">{m.value}</p>
+            </div>
+          ))}
+          <div>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Teknologi</p>
+            <ul className="flex flex-wrap gap-1.5">
+              {p.tech.map((t) => (
+                <li key={t} className="badge">
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {p.links?.demo || p.links?.github || p.links?.drive ? (
+            <div className="flex flex-col gap-2 pt-1">
+              {p.links.demo ? (
+                <a className="btn-primary" href={p.links.demo} target="_blank" rel="noreferrer">
+                  <ExternalLink size={16} /> Lihat Demo
+                </a>
+              ) : null}
+              {p.links.github ? (
+                <a className="btn-ghost" href={p.links.github} target="_blank" rel="noreferrer">
+                  <Github size={16} /> Source Code
+                </a>
+              ) : null}
+              {p.links.drive ? (
+                <a className="btn-ghost" href={p.links.drive} target="_blank" rel="noreferrer">
+                  <FolderDown size={16} /> Google Drive
+                </a>
+              ) : null}
+            </div>
+          ) : null}
+        </aside>
+      </div>
+
+      <nav className="border-t border-slate-200 pt-8" aria-label="Proyek berikutnya">
+        <Link href={`/projects/${next.slug}`} className="card card-hover group flex items-center justify-between gap-4 p-5">
+          <span>
+            <span className="block text-xs font-semibold uppercase tracking-wide text-slate-500">Proyek berikutnya</span>
+            <span className="font-bold text-slate-900">{next.title}</span>
+          </span>
+          <ArrowRight size={20} className="text-slate-400 transition group-hover:translate-x-1 group-hover:text-brand-600" />
+        </Link>
+      </nav>
+    </article>
   );
 }

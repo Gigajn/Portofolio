@@ -1,25 +1,26 @@
 export function Section({
   id,
+  eyebrow,
   title,
   subtitle,
   children,
 }: {
-  id?: string;
+  id: string;
+  eyebrow?: string;
   title: string;
   subtitle?: string;
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="section" aria-labelledby={id ? `${id}-title` : undefined}>
-      <header className="section-header">
-        <h2 id={id ? `${id}-title` : undefined} className="h2">{title}</h2>
-        {subtitle ? <p className="subtle max-w-2xl">{subtitle}</p> : null}
-        <div className="separator" />
+    <section id={id} className="section" aria-labelledby={`${id}-title`}>
+      <header className="max-w-2xl space-y-3">
+        {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+        <h2 id={`${id}-title`} className="h2">
+          {title}
+        </h2>
+        {subtitle ? <p className="subtle text-lg">{subtitle}</p> : null}
       </header>
-
-      <div className="section-body">
-        {children}
-      </div>
+      <div className="mt-8 md:mt-10">{children}</div>
     </section>
   );
 }
