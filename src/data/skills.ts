@@ -6,6 +6,19 @@ export type SkillGroup = {
 
 export const skillGroups: SkillGroup[] = [
   {
+    title: "Machine Learning & AI",
+    description: "Pengolahan data, pemodelan, evaluasi, dan interpretasi model.",
+    items: [
+      "Python",
+      "TensorFlow",
+      "XGBoost",
+      "Scikit-learn",
+      "Pandas",
+      "Optuna",
+      "SHAP",
+    ],
+  },
+  {
     title: "Backend & Database",
     description: "API, logika bisnis, dan pengelolaan data.",
     items: [
@@ -23,19 +36,6 @@ export const skillGroups: SkillGroup[] = [
     title: "Frontend",
     description: "Antarmuka web yang responsif dan mudah digunakan.",
     items: ["Next.js", "Angular", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    title: "Data & Machine Learning",
-    description: "Pemodelan, evaluasi, dan interpretasi model.",
-    items: [
-      "Python",
-      "TensorFlow",
-      "XGBoost",
-      "Scikit-learn",
-      "Pandas",
-      "Optuna",
-      "SHAP",
-    ],
   },
   {
     title: "Mobile, Game & AR",

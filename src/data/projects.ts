@@ -22,6 +22,41 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "ml-bansos-karangrau-xgb",
+    title: "Prediksi Kelayakan Bansos Desa Karangrau",
+    category: "Machine Learning",
+    summary:
+      "Model XGBoost untuk membantu menentukan kelayakan penerima bantuan sosial secara transparan.",
+    description:
+      "Model machine learning berbasis XGBoost untuk membantu menentukan kelayakan penerima bantuan sosial di Desa Karangrau. Hasil prediksi dilengkapi penjelasan yang transparan menggunakan SHAP agar keputusan dapat dipertanggungjawabkan.",
+    tech: ["Python", "XGBoost", "Optuna", "SHAP"],
+    image: "/assets/machine-learning.png",
+    highlights: [
+      "Feature engineering dari data penerima bantuan",
+      "Tuning hyperparameter dengan Optuna",
+      "Interpretasi model dengan SHAP / feature importance",
+    ],
+
+    links: { github: "https://github.com/Gigajn/Model-Bansos-Karangrau" },
+  },
+  {
+    slug: "ml-stunting-tf",
+    title: "Model Prediksi Risiko Stunting",
+    category: "Machine Learning",
+    summary:
+      "Model TensorFlow untuk menilai risiko stunting dengan pipeline preprocessing yang dapat direproduksi.",
+    description:
+      "Model TensorFlow untuk menilai risiko stunting, mencakup eksperimen fitur, evaluasi model, dan pipeline preprocessing yang dapat direproduksi.",
+    tech: ["Python", "TensorFlow", "Pandas", "Scikit-learn"],
+    image: "/assets/machine-learning.png",
+    highlights: [
+      "Notebook dan pipeline preprocessing yang terdokumentasi",
+      "Evaluasi model dengan accuracy, precision, dan recall",
+    ],
+
+    links: { github: "https://github.com/Gigajn/Childer-Growth-Guardian" },
+  },
+  {
     slug: "bge-supply",
     title: "BGE Supply",
     category: "Web",
@@ -35,6 +70,8 @@ export const projects: Project[] = [
       "Pengelolaan data produk (CRUD) melalui panel admin",
       "Sinkronisasi data dengan katalog e-commerce",
     ],
+
+    links: { github: "https://github.com/Gigajn/BGE-Supply" },
   },
   {
     slug: "imm-formatur-vote",
@@ -50,6 +87,11 @@ export const projects: Project[] = [
       "Hak akses berbasis peran (role-based access control)",
       "Rekap hasil pemilihan secara real-time",
     ],
+
+    links: {
+      demo: "https://imm-zeta.vercel.app",
+      github: "https://github.com/Gigajn/formatur-fe",
+    },
   },
   {
     slug: "habibie-club-genius",
@@ -64,37 +106,6 @@ export const projects: Project[] = [
     highlights: [
       "Manajemen modul pembelajaran",
       "Dashboard pemantauan progres siswa",
-    ],
-  },
-  {
-    slug: "ml-bansos-karangrau-xgb",
-    title: "Prediksi Kelayakan Bansos Desa Karangrau",
-    category: "Machine Learning",
-    summary:
-      "Model XGBoost untuk membantu menentukan kelayakan penerima bantuan sosial secara transparan.",
-    description:
-      "Model machine learning berbasis XGBoost untuk membantu menentukan kelayakan penerima bantuan sosial di Desa Karangrau. Hasil prediksi dilengkapi penjelasan yang transparan menggunakan SHAP agar keputusan dapat dipertanggungjawabkan.",
-    tech: ["Python", "XGBoost", "Optuna", "SHAP"],
-    image: "/assets/machine-learning.png",
-    highlights: [
-      "Feature engineering dari data penerima bantuan",
-      "Tuning hyperparameter dengan Optuna",
-      "Interpretasi model dengan SHAP / feature importance",
-    ],
-  },
-  {
-    slug: "ml-stunting-tf",
-    title: "Model Prediksi Risiko Stunting",
-    category: "Machine Learning",
-    summary:
-      "Model TensorFlow untuk menilai risiko stunting dengan pipeline preprocessing yang dapat direproduksi.",
-    description:
-      "Model TensorFlow untuk menilai risiko stunting, mencakup eksperimen fitur, evaluasi model, dan pipeline preprocessing yang dapat direproduksi.",
-    tech: ["Python", "TensorFlow", "Pandas", "Scikit-learn"],
-    image: "/assets/machine-learning.png",
-    highlights: [
-      "Notebook dan pipeline preprocessing yang terdokumentasi",
-      "Evaluasi model dengan accuracy, precision, dan recall",
     ],
   },
   {
@@ -127,8 +138,8 @@ export const projects: Project[] = [
 ];
 
 export const projectCategories: ProjectCategory[] = [
-  "Web",
   "Machine Learning",
+  "Web",
   "Game & AR",
 ];
 

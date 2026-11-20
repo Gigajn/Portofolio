@@ -9,22 +9,19 @@ export const personal = {
 
   /** Peran/posisi utama yang ingin dilihat HR. */
   role: "Mahasiswa Sistem Informasi",
-  headline: "Web Developer · Backend · Data & Machine Learning",
+  headline: "Machine Learning · Applied AI · Backend Development",
 
   location: "Yogyakarta, Indonesia",
 
-  /**
-   * TODO: isi status yang sedang Anda cari, mis.
-   * "Terbuka untuk magang" atau "Terbuka untuk posisi Junior Backend Developer".
-   */
-  openTo: "",
+  /** Status yang sedang dicari (kosongkan "" untuk menyembunyikan). */
+  openTo: "Terbuka untuk posisi Machine Learning / AI Engineer",
 
   summary:
-    "Mahasiswa Sistem Informasi di Universitas Ahmad Dahlan yang senang mengubah masalah nyata menjadi produk digital. Saya membangun aplikasi web, aplikasi Augmented Reality, game, hingga model machine learning, dengan minat utama pada pengembangan backend dan pengolahan data.",
+    "Mahasiswa Sistem Informasi di Universitas Ahmad Dahlan yang berfokus pada machine learning dan penerapan AI untuk menyelesaikan masalah nyata. Berpengalaman membangun model prediksi dengan TensorFlow dan XGBoost, sekaligus sistem backend dan aplikasi web yang membawa model tersebut ke pengguna.",
 
   about: [
-    "Saya merancang dan mengembangkan perangkat lunak yang mudah digunakan dan andal di balik layar. Pekerjaan saya mencakup antarmuka produk sekaligus sistem inti di bawahnya: API, database, dan alur data yang menjaga informasi tetap akurat.",
-    "Fokus saya adalah endpoint yang jelas, pipeline data yang dapat diandalkan, dan perbaikan kecil yang konsisten agar produk lebih nyaman digunakan serta mudah dirawat.",
+    "Saya tertarik pada bagaimana machine learning dan AI bisa diterapkan untuk membantu pengambilan keputusan, mulai dari menilai risiko stunting hingga menentukan kelayakan penerima bantuan sosial. Saya terbiasa menangani seluruh alurnya: menyiapkan data, feature engineering, melatih dan mengevaluasi model, hingga menjelaskan hasilnya dengan SHAP.",
+    "Latar belakang saya di pengembangan backend dan web (Laravel, Node.js, Angular, Next.js) membantu saya membawa model ke tahap yang bisa dipakai: API yang jelas, pipeline data yang andal, dan aplikasi yang mudah digunakan. Saya ingin terus berkembang di bidang Machine Learning dan AI Engineering di perusahaan nasional maupun multinasional.",
   ],
 
   values: [
@@ -68,5 +65,5 @@ export const personal = {
 
   email: "gigahuda12@gmail.com",
   github: "https://github.com/gigajn",
-  linkedin: "https://linkedin.com/in/gigajdn",
+  linkedin: "https://www.linkedin.com/in/gigajdn",
 };

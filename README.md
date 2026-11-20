@@ -1,19 +1,18 @@
 # Portofolio – Giga Jundan Al Huda
 
-Website portofolio pribadi **Giga Jundan Al Huda**, mahasiswa Sistem Informasi di Universitas Ahmad Dahlan, Yogyakarta. Berisi profil singkat, keahlian, proyek pilihan, pendidikan, dan kontak.
+Website portofolio pribadi **Giga Jundan Al Huda**, mahasiswa Sistem Informasi di Universitas Ahmad Dahlan, Yogyakarta, dengan fokus pada Machine Learning dan penerapan AI. Berisi profil singkat, keahlian, proyek pilihan, pendidikan, dan kontak.
 
-<!-- TODO: ganti dengan URL website setelah di-deploy -->
-🌐 **Demo:** _segera hadir_ · 📧 [gigahuda12@gmail.com](mailto:gigahuda12@gmail.com) · 💼 [LinkedIn](https://linkedin.com/in/gigajdn)
+🌐 **Website:** [portofolio-nu-green-15.vercel.app](https://portofolio-nu-green-15.vercel.app) · 📧 [gigahuda12@gmail.com](mailto:gigahuda12@gmail.com) · 💼 [LinkedIn](https://www.linkedin.com/in/gigajdn)
 
 ## Proyek yang ditampilkan
 
 | Proyek | Bidang | Teknologi |
 | --- | --- | --- |
-| BGE Supply | Web (back-office) | Laravel, Filament, PHP, PostgreSQL |
-| Website Pemilihan Formatur IMM | Web (e-voting) | Angular, TypeScript, Express, Node.js |
+| [Prediksi Kelayakan Bansos Desa Karangrau](https://github.com/Gigajn/Model-Bansos-Karangrau) | Machine Learning | Python, XGBoost, Optuna, SHAP |
+| [Model Prediksi Risiko Stunting](https://github.com/Gigajn/Childer-Growth-Guardian) | Machine Learning | Python, TensorFlow, Pandas, Scikit-learn |
+| [BGE Supply](https://github.com/Gigajn/BGE-Supply) | Web (back-office) | Laravel, Filament, PHP, PostgreSQL |
+| [Website Pemilihan Formatur IMM](https://github.com/Gigajn/formatur-fe) ([demo](https://imm-zeta.vercel.app)) | Web (e-voting) | Angular, TypeScript, Express, Node.js |
 | Habibie Club Genius | Web (platform belajar) | Web |
-| Prediksi Kelayakan Bansos Desa Karangrau | Machine Learning | Python, XGBoost, Optuna, SHAP |
-| Model Prediksi Risiko Stunting | Machine Learning | Python, TensorFlow, Pandas, Scikit-learn |
 | Wisata Konservasi Augmented Reality | AR | Unity, C#, Vuforia |
 | Oodin Games | Game | Construct 3 |
 

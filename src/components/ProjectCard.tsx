@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Github } from "lucide-react";
 import type { Project } from "@/data/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -41,6 +41,21 @@ export function ProjectCard({ project }: { project: Project }) {
             </li>
           ))}
         </ul>
+
+        {project.links?.github || project.links?.demo ? (
+          <div className="relative z-10 flex flex-wrap gap-4 border-t border-slate-100 pt-3 text-sm font-semibold">
+            {project.links.demo ? (
+              <a href={project.links.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-brand-700 hover:text-brand-900">
+                <ExternalLink size={15} /> Live Demo
+              </a>
+            ) : null}
+            {project.links.github ? (
+              <a href={project.links.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
+                <Github size={15} /> Source Code
+              </a>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </article>
   );
