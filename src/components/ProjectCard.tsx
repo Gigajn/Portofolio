@@ -1,23 +1,25 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowUpRight, ExternalLink, Github } from "lucide-react";
+import { ArrowUpRight, ExternalLink, FolderDown, Github } from "lucide-react";
+import { ProjectCover } from "@/components/ProjectCover";
 import type { Project } from "@/data/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="card card-hover group relative flex flex-col overflow-hidden">
       <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-slate-200 bg-slate-100">
-        <Image
-          src={project.image}
-          alt={`Tampilan proyek ${project.title}`}
-          fill
+        <ProjectCover
+          project={project}
           sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-          quality={80}
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          className="transition-transform duration-500 group-hover:scale-[1.04]"
         />
         <span className="badge-brand absolute left-3 top-3 bg-white/95 shadow-sm">
           {project.category}
         </span>
+        {project.status ? (
+          <span className="absolute right-3 top-3 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-900 shadow-sm">
+            {project.status}
+          </span>
+        ) : null}
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-5">
@@ -42,7 +44,7 @@ export function ProjectCard({ project }: { project: Project }) {
           ))}
         </ul>
 
-        {project.links?.github || project.links?.demo ? (
+        {project.links?.github || project.links?.demo || project.links?.drive ? (
           <div className="relative z-10 flex flex-wrap gap-4 border-t border-slate-100 pt-3 text-sm font-semibold">
             {project.links.demo ? (
               <a href={project.links.demo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-brand-700 hover:text-brand-900">
@@ -52,6 +54,11 @@ export function ProjectCard({ project }: { project: Project }) {
             {project.links.github ? (
               <a href={project.links.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
                 <Github size={15} /> Source Code
+              </a>
+            ) : null}
+            {project.links.drive ? (
+              <a href={project.links.drive} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
+                <FolderDown size={15} /> Google Drive
               </a>
             ) : null}
           </div>

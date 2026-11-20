@@ -8,6 +8,7 @@ Website portofolio pribadi **Giga Jundan Al Huda**, mahasiswa Sistem Informasi d
 
 | Proyek | Bidang | Teknologi |
 | --- | --- | --- |
+| [Archodin – Framework Multi-Agent AI](https://github.com/Gigajn/Archodin_Inc) (dalam pengembangan) | AI | Rust, LLM, LangChain |
 | [Prediksi Kelayakan Bansos Desa Karangrau](https://github.com/Gigajn/Model-Bansos-Karangrau) | Machine Learning | Python, XGBoost, Optuna, SHAP |
 | [Model Prediksi Risiko Stunting](https://github.com/Gigajn/Childer-Growth-Guardian) | Machine Learning | Python, TensorFlow, Pandas, Scikit-learn |
 | [BGE Supply](https://github.com/Gigajn/BGE-Supply) | Web (back-office) | Laravel, Filament, PHP, PostgreSQL |
@@ -18,7 +19,7 @@ Website portofolio pribadi **Giga Jundan Al Huda**, mahasiswa Sistem Informasi d
 
 ## Teknologi website
 
-- [Next.js](https://nextjs.org) (App Router, static generation)
+- [Next.js](https://nextjs.org) (App Router, static generation). Catatan: website ini ditulis dengan TypeScript, bukan Rust. Turbopack, alat build bawaan Next.js, memang dibuat dengan Rust.
 - [TypeScript](https://www.typescriptlang.org)
 - [Tailwind CSS v4](https://tailwindcss.com)
 - [Lucide](https://lucide.dev) untuk ikon
@@ -52,7 +53,7 @@ Semua konten ada di folder `src/data`, jadi tidak perlu menyentuh komponen:
 
 Kolom yang dibiarkan kosong (`""`) otomatis disembunyikan. Cari komentar `TODO` untuk bagian yang sebaiknya dilengkapi, misalnya file CV, foto profil, dan tautan demo proyek.
 
-Gambar proyek disimpan di `public/assets`, CV di `public/cv`.
+Gambar proyek disimpan di `public/assets`, CV di `public/cv`. Proyek tanpa gambar otomatis mendapat sampul bergaya. Setiap proyek bisa diberi tautan `demo`, `github`, dan `drive` (Google Drive).
 
 ## Struktur folder
 

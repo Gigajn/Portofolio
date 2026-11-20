@@ -1,4 +1,4 @@
-export type ProjectCategory = "Web" | "Machine Learning" | "Game & AR";
+export type ProjectCategory = "AI & Machine Learning" | "Web" | "Game & AR";
 
 export type Project = {
   slug: string;
@@ -13,18 +13,38 @@ export type Project = {
   /** TODO (opsional): periode pengerjaan, mis. "Mar – Jun 2024". */
   period?: string;
   tech: string[];
-  /** Path gambar di folder public/assets. */
-  image: string;
+  /** Path gambar di folder public/assets. Kosongkan untuk sampul otomatis. */
+  image?: string;
+  /** Status singkat, mis. "Dalam pengembangan". */
+  status?: string;
   highlights?: string[];
   /** TODO (opsional): tautan demo / repository. HR sangat terbantu dengan tautan ini. */
-  links?: { demo?: string; github?: string };
+  links?: { demo?: string; github?: string; drive?: string };
 };
 
 export const projects: Project[] = [
   {
+    slug: "archodin",
+    title: "Archodin – Framework Multi-Agent AI",
+    category: "AI & Machine Learning",
+    status: "Dalam pengembangan",
+    summary:
+      "Library Rust untuk membangun sistem multi-agent berbasis LLM, dikembangkan di atas langchain-rust.",
+    description:
+      "Archodin adalah library Rust untuk membangun sistem multi-agent berbasis Large Language Model (LLM), dikembangkan di atas fork langchain-rust (lisensi MIT). Konsepnya adalah fondasi sebuah \"perusahaan\" yang stafnya terdiri dari AI agent: setiap agent memiliki peran, instruksi, tools, dan memori, lalu bekerja sama dalam departemen untuk menyelesaikan pekerjaan yang diberikan, dengan persetujuan akhir tetap di tangan manusia. Proyek ini masih dalam tahap pengembangan aktif.",
+    tech: ["Rust", "LLM", "LangChain", "Multi-Agent"],
+    highlights: [
+      "Agent berbasis LLM dengan peran, tools, dan memori masing-masing",
+      "Agent dikelompokkan ke dalam departemen dengan tujuan dan anggaran sendiri",
+      "Keputusan penting tetap memerlukan persetujuan manusia (human-in-the-loop)",
+      "Dibangun di atas langchain-rust dan tetap dapat disinkronkan dengan upstream",
+    ],
+    links: { github: "https://github.com/Gigajn/Archodin_Inc" },
+  },
+  {
     slug: "ml-bansos-karangrau-xgb",
     title: "Prediksi Kelayakan Bansos Desa Karangrau",
-    category: "Machine Learning",
+    category: "AI & Machine Learning",
     summary:
       "Model XGBoost untuk membantu menentukan kelayakan penerima bantuan sosial secara transparan.",
     description:
@@ -42,7 +62,7 @@ export const projects: Project[] = [
   {
     slug: "ml-stunting-tf",
     title: "Model Prediksi Risiko Stunting",
-    category: "Machine Learning",
+    category: "AI & Machine Learning",
     summary:
       "Model TensorFlow untuk menilai risiko stunting dengan pipeline preprocessing yang dapat direproduksi.",
     description:
@@ -138,7 +158,7 @@ export const projects: Project[] = [
 ];
 
 export const projectCategories: ProjectCategory[] = [
-  "Machine Learning",
+  "AI & Machine Learning",
   "Web",
   "Game & AR",
 ];

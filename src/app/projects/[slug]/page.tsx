@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, FolderDown, Github } from "lucide-react";
+import { ProjectCover } from "@/components/ProjectCover";
 import { getProjectBySlug, projects } from "@/data/projects";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: p.title,
     description: p.summary,
     alternates: { canonical: `/projects/${p.slug}` },
-    openGraph: { title: p.title, description: p.summary, images: [{ url: p.image }] },
+    openGraph: { title: p.title, description: p.summary, ...(p.image ? { images: [{ url: p.image }] } : {}) },
   };
 }
 
@@ -32,6 +32,7 @@ export default async function ProjectDetail({ params }: Props) {
   const next = projects[(index + 1) % projects.length];
   const meta = [
     { label: "Kategori", value: p.category },
+    { label: "Status", value: p.status },
     { label: "Peran", value: p.role },
     { label: "Periode", value: p.period },
   ].filter((m) => m.value);
@@ -49,15 +50,7 @@ export default async function ProjectDetail({ params }: Props) {
       </header>
 
       <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm">
-        <Image
-          src={p.image}
-          alt={`Tampilan proyek ${p.title}`}
-          fill
-          sizes="(min-width:1024px) 896px, 100vw"
-          quality={90}
-          className="object-cover"
-          priority
-        />
+        <ProjectCover project={p} sizes="(min-width:1024px) 896px, 100vw" priority />
       </div>
 
       <div className="grid gap-8 md:grid-cols-[1.6fr_1fr]">
@@ -99,7 +92,7 @@ export default async function ProjectDetail({ params }: Props) {
               ))}
             </ul>
           </div>
-          {p.links?.demo || p.links?.github ? (
+          {p.links?.demo || p.links?.github || p.links?.drive ? (
             <div className="flex flex-col gap-2 pt-1">
               {p.links.demo ? (
                 <a className="btn-primary" href={p.links.demo} target="_blank" rel="noreferrer">
@@ -109,6 +102,11 @@ export default async function ProjectDetail({ params }: Props) {
               {p.links.github ? (
                 <a className="btn-ghost" href={p.links.github} target="_blank" rel="noreferrer">
                   <Github size={16} /> Source Code
+                </a>
+              ) : null}
+              {p.links.drive ? (
+                <a className="btn-ghost" href={p.links.drive} target="_blank" rel="noreferrer">
+                  <FolderDown size={16} /> Google Drive
                 </a>
               ) : null}
             </div>
