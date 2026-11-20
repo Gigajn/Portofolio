@@ -1,84 +1,79 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import Script from "next/script";
+import { personal } from "@/data/personal";
+import { skillGroups } from "@/data/skills";
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const siteName = "Portfolio – Your Name";
+const title = `${personal.name} – ${personal.role}`;
+const description = personal.summary;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: "Giga Jundan Al Huda",
-    template: "%s | Portfolio – Your Name",
-  },
-  description:
-    "I craft calm, useful digital experiences across web, mobile, AR, and machine learning.",
+  title: { default: title, template: `%s | ${personal.name}` },
+  description,
   keywords: [
-    "portfolio",
-    "next.js",
-    "frontend",
-    "flutter",
-    "laravel",
-    "unity",
-    "augmented reality",
+    personal.name,
+    "portofolio",
+    "web developer",
+    "backend developer",
     "machine learning",
+    "Laravel",
+    "Next.js",
+    "Yogyakarta",
+    "Universitas Ahmad Dahlan",
   ],
-  authors: [{ name: "Your Name" }],
-  alternates: { canonical: siteUrl },
+  authors: [{ name: personal.name, url: siteUrl }],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
+    locale: "id_ID",
     url: siteUrl,
-    title: "Giga Jundan Al Huda",
-    siteName,
-    description:
-      "I craft calm, useful digital experiences across web, mobile, AR, and machine learning.",
-    images: [{ url: "/assets/og-image.png", width: 1200, height: 630, alt: "Portfolio – Your Name" }],
+    title,
+    siteName: `Portofolio ${personal.name}`,
+    description,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Portfolio – Your Name",
-    description:
-      "I craft calm, useful digital experiences across web, mobile, AR, and machine learning.",
-    images: ["/assets/og-image.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  icons: { icon: "/favicon.ico" },
+  twitter: { card: "summary_large_image", title, description },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Your Name",
+    name: personal.name,
     url: siteUrl,
-    sameAs: [
-      // Fill your social links if any
-      // "https://github.com/username",
-      // "https://www.linkedin.com/in/username"
-    ],
-    jobTitle: "Software Developer / Product Engineer",
-    knowsAbout: [
-      "Next.js",
-      "TypeScript",
-      "Flutter",
-      "Laravel",
-      "Unity AR",
-      "TensorFlow",
-      "XGBoost",
-    ],
+    email: `mailto:${personal.email}`,
+    jobTitle: personal.role,
+    address: { "@type": "PostalAddress", addressLocality: "Yogyakarta", addressCountry: "ID" },
+    alumniOf: personal.education.map((e) => ({ "@type": "CollegeOrUniversity", name: e.institution })),
+    sameAs: [personal.github, personal.linkedin],
+    knowsAbout: skillGroups.flatMap((g) => g.items),
   };
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="id" className={jakarta.variable}>
       <body>
-        <main className="container page-stack py-10">{children}</main>
+        <a
+          href="#konten"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:shadow"
+        >
+          Langsung ke konten
+        </a>
+        <Navbar />
+        <main id="konten" className="container py-10">
+          {children}
+        </main>
         <Footer />
-        <Script
-          id="ld-json-person"
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />

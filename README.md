@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portofolio – Giga Jundan Al Huda
 
-## Getting Started
+Website portofolio pribadi **Giga Jundan Al Huda**, mahasiswa Sistem Informasi di Universitas Ahmad Dahlan, Yogyakarta. Berisi profil singkat, keahlian, proyek pilihan, pendidikan, dan kontak.
 
-First, run the development server:
+<!-- TODO: ganti dengan URL website setelah di-deploy -->
+🌐 **Demo:** _segera hadir_ · 📧 [gigahuda12@gmail.com](mailto:gigahuda12@gmail.com) · 💼 [LinkedIn](https://linkedin.com/in/gigajdn)
+
+## Proyek yang ditampilkan
+
+| Proyek | Bidang | Teknologi |
+| --- | --- | --- |
+| BGE Supply | Web (back-office) | Laravel, Filament, PHP, PostgreSQL |
+| Website Pemilihan Formatur IMM | Web (e-voting) | Angular, TypeScript, Express, Node.js |
+| Habibie Club Genius | Web (platform belajar) | Web |
+| Prediksi Kelayakan Bansos Desa Karangrau | Machine Learning | Python, XGBoost, Optuna, SHAP |
+| Model Prediksi Risiko Stunting | Machine Learning | Python, TensorFlow, Pandas, Scikit-learn |
+| Wisata Konservasi Augmented Reality | AR | Unity, C#, Vuforia |
+| Oodin Games | Game | Construct 3 |
+
+## Teknologi website
+
+- [Next.js](https://nextjs.org) (App Router, static generation)
+- [TypeScript](https://www.typescriptlang.org)
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [Lucide](https://lucide.dev) untuk ikon
+- SEO: metadata, Open Graph image otomatis, `sitemap.xml`, `robots.txt`, dan JSON-LD
+
+## Menjalankan secara lokal
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Build produksi:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Mengubah isi website
 
-To learn more about Next.js, take a look at the following resources:
+Semua konten ada di folder `src/data`, jadi tidak perlu menyentuh komponen:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| File | Isi |
+| --- | --- |
+| `src/data/personal.ts` | Nama, ringkasan, pendidikan, pengalaman, tautan CV/foto, kontak |
+| `src/data/projects.ts` | Daftar proyek (judul, deskripsi, teknologi, gambar, tautan demo/GitHub) |
+| `src/data/skills.ts` | Keahlian yang dikelompokkan per bidang |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Kolom yang dibiarkan kosong (`""`) otomatis disembunyikan. Cari komentar `TODO` untuk bagian yang sebaiknya dilengkapi, misalnya file CV, foto profil, dan tautan demo proyek.
 
-## Deploy on Vercel
+Gambar proyek disimpan di `public/assets`, CV di `public/cv`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Struktur folder
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+├── app/
+│   ├── page.tsx                  # Halaman utama
+│   ├── projects/[slug]/page.tsx  # Halaman detail proyek
+│   ├── layout.tsx                # Layout, font, metadata SEO
+│   ├── opengraph-image.tsx       # Gambar pratinjau saat link dibagikan
+│   ├── sitemap.ts / robots.ts
+│   └── globals.css               # Tema warna & gaya dasar
+├── components/                   # Navbar, Hero, ProjectCard, Contact, dll.
+└── data/                         # Konten website
+```
+
+## Deploy
+
+Cara termudah adalah [Vercel](https://vercel.com/new): impor repository ini, lalu tambahkan environment variable `NEXT_PUBLIC_SITE_URL` berisi URL website (mis. `https://nama-anda.vercel.app`) agar sitemap dan metadata memakai domain yang benar.

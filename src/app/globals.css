@@ -1,30 +1,41 @@
-/* Tailwind v4: import satu baris */
 @import "tailwindcss";
 
-/* (Opsional) jika Anda masih punya tailwind.config.* dan ingin memakainya: aktifkan dengan @config */
-/* @config "../../tailwind.config.ts"; */
-
 @theme {
-  --color-brand-50:  #f6faf8;
-  --color-brand-100: #ecf4f0;
-  --color-brand-200: #dceae2;
-  --color-brand-300: #c6dbce;
-  --color-brand-400: #aacbb7;
-  --color-brand-500: #86b49d; /* primary */
-  --color-brand-600: #6ba38a;
-  --color-brand-700: #578873;
-  --color-brand-800: #496f5f;
-  --color-brand-900: #3f5c4f;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-50: #f3f8f5;
+  --color-brand-100: #e4efe8;
+  --color-brand-200: #c9dfd1;
+  --color-brand-300: #a5c8b2;
+  --color-brand-400: #7fae91;
+  --color-brand-500: #5e9475;
+  --color-brand-600: #4a7b5f; /* primary: kontras teks putih ≥ 4.5:1 */
+  --color-brand-700: #3c634d;
+  --color-brand-800: #314f3e;
+  --color-brand-900: #283f32;
 }
 
-html, body { height: 100%; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
 
-/* Backdrop modern & subtle (grid + soft radial accents) */
 body {
   @apply bg-neutral-50 text-slate-800 antialiased;
   position: relative;
 }
+
+/* Latar belakang halus: grid tipis + aksen hijau lembut */
 body::before {
   content: "";
   position: fixed;
@@ -32,95 +43,67 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background-image:
-    radial-gradient(60rem 18rem at 12% 0%, rgba(134,180,157,.18), transparent 60%),
-    radial-gradient(70rem 22rem at 88% 6%, rgba(134,180,157,.12), transparent 65%),
-    linear-gradient(rgba(15,23,42,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15,23,42,.04) 1px, transparent 1px);
+    radial-gradient(60rem 18rem at 12% 0%, rgba(94, 148, 117, 0.14), transparent 60%),
+    radial-gradient(70rem 22rem at 88% 6%, rgba(94, 148, 117, 0.1), transparent 65%),
+    linear-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
   background-size: auto, auto, 24px 24px, 24px 24px;
-  background-position: center, center, center, center;
   -webkit-mask-image: radial-gradient(120% 90% at 50% 10%, #000 55%, transparent 100%);
   mask-image: radial-gradient(120% 90% at 50% 10%, #000 55%, transparent 100%);
 }
-main, footer { position: relative; z-index: 1; }
-
-/* Layout helpers */
-.container { @apply mx-auto max-w-7xl px-5; }
-.page-stack { @apply space-y-20 md:space-y-28; } /* vertical rhythm antar section */
-
-/* Small components */
-.card { @apply rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden; }
-.card-hover { @apply transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-200; }
-.btn-primary { @apply inline-flex items-center gap-2 rounded-xl bg-brand-600 text-white px-5 py-2.5 font-medium hover:bg-brand-700 active:scale-[.98] transition shadow-sm; }
-.btn-ghost { @apply inline-flex items-center rounded-xl px-5 py-2.5 border border-slate-200 hover:bg-slate-100 transition; }
-.badge { @apply inline-flex items-center rounded-full bg-slate-100 text-slate-700 px-3 py-1 text-xs border border-slate-200; }
-.h2 { @apply text-3xl font-bold tracking-tight; }
-.subtle { @apply text-slate-600; }
-
-/* Simple hairline separator */
-.separator { @apply h-px bg-slate-200; }
-
-/* Pills navigation under Hero */
-.pills { @apply mt-6 flex flex-wrap gap-2 justify-center; }
-.pill {
-  @apply inline-flex items-center rounded-2xl border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 transition shadow-sm;
-}
-.pill:hover {
-  @apply bg-slate-100 border-brand-300 text-slate-900;
-  box-shadow: 0 8px 24px -12px rgba(134,180,157,.35);
-}
-
-/* Hero as clean white card */
-.hero-surface {
-  @apply rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden p-8 md:p-12 xl:p-14;
-}
-
-/* === New: Section (tanpa box) === */
-.section { @apply scroll-mt-24; }
-.section-header { @apply space-y-3 md:space-y-4; }
-.section-body { @apply mt-6 md:mt-8; }
-
-/* Passion chips */
-.chips { @apply flex flex-wrap gap-2; }
-.chip {
-  @apply inline-flex items-center rounded-full px-3 py-1.5 text-xs md:text-sm text-slate-700 bg-white
-         border border-slate-200 shadow-sm transition;
-}
-.chip:hover { @apply bg-brand-50 border-brand-200 text-slate-900; }
-
-/* Accent arc halus di belakang hero */
-.hero-arc {
+header,
+main,
+footer {
   position: relative;
-  isolation: isolate;
-}
-.hero-arc::before {
-  content: "";
-  position: absolute;
-  inset: -20px;
-  z-index: -1;
-  /* radial lembut + conic arc, sangat subtle */
-  background:
-    radial-gradient(60% 80% at 18% 0%, rgba(134,180,157,.18), transparent 60%),
-    conic-gradient(from 210deg at 85% 10%, rgba(134,180,157,.22), transparent 40% 60%, rgba(134,180,157,.14));
-  filter: blur(26px) saturate(112%);
-  border-radius: 28px;
-  /* memudarkan supaya tidak bertabrakan saat scroll */
-  -webkit-mask-image: radial-gradient(120% 110% at 50% 0%, #000 60%, transparent 100%);
-  mask-image: radial-gradient(120% 110% at 50% 0%, #000 60%, transparent 100%);
+  z-index: 1;
 }
 
-/* Marquee (opsional, untuk varian 2) */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+::selection {
+  @apply bg-brand-200 text-brand-900;
 }
-.marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+
+/* Layout */
+.container {
+  @apply mx-auto max-w-6xl px-4 sm:px-6;
 }
-.marquee-track {
-  display: flex;
-  gap: .5rem;
-  width: max-content;
-  animation: marquee 18s linear infinite;
+.page-stack {
+  @apply space-y-24 md:space-y-32;
+}
+.section {
+  @apply scroll-mt-24;
+}
+
+/* Komponen kecil */
+.card {
+  @apply rounded-2xl bg-white border border-slate-200 shadow-sm;
+}
+.card-hover {
+  @apply transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:border-brand-300;
+}
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 py-2.5 font-semibold text-white shadow-sm transition hover:bg-brand-700 active:scale-[.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2;
+}
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-2.5 font-semibold text-slate-800 transition hover:border-brand-400 hover:bg-brand-50 active:scale-[.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2;
+}
+.icon-btn {
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:border-brand-300 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400;
+}
+.badge {
+  @apply inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-medium text-slate-700;
+}
+.badge-brand {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-800;
+}
+.eyebrow {
+  @apply text-sm font-semibold uppercase tracking-wider text-brand-700;
+}
+.h2 {
+  @apply text-3xl font-bold tracking-tight text-slate-900 md:text-4xl;
+}
+.subtle {
+  @apply text-slate-600;
+}
+.nav-link {
+  @apply rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900;
 }
