@@ -139,6 +139,9 @@ export const projects: Project[] = [
     tech: ["Unity", "C#", "Vuforia"],
     image: "/assets/wisata-konservasi-ar.png",
     highlights: ["Tracking berbasis marker dan markerless", "Optimasi model 3D"],
+    links: {
+      drive: "https://drive.google.com/drive/folders/1_8BEBPxCg5VEjwCNdyV_LlMnCufkJ30t?usp=sharing",
+    },
   },
 ];
 

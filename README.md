@@ -14,7 +14,7 @@ Website portofolio pribadi **Giga Jundan Al Huda**, mahasiswa Sistem Informasi d
 | [BGE Supply](https://github.com/Gigajn/BGE-Supply) | Web (back-office) | Laravel, Filament, PHP, PostgreSQL |
 | [Website Pemilihan Formatur IMM](https://github.com/Gigajn/formatur-fe) ([demo](https://imm-zeta.vercel.app)) | Web (e-voting) | Angular, TypeScript, Express, Node.js |
 | Habibie Club Genius | Web (platform belajar) | Web |
-| Wisata Konservasi Augmented Reality | AR | Unity, C#, Vuforia |
+| [Wisata Konservasi Augmented Reality](https://drive.google.com/drive/folders/1_8BEBPxCg5VEjwCNdyV_LlMnCufkJ30t?usp=sharing) (Google Drive) | AR | Unity, C#, Vuforia |
 
 ## Teknologi website
 
